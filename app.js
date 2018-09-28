@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
+const path = require('path');
 
 // load User model
 require('./models/User');
@@ -54,7 +55,8 @@ app.use((req, res, next) => {
   next();
 });
 
-
+// set static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 
