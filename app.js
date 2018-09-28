@@ -61,9 +61,11 @@ app.use((req, res, next) => {
 // load router
 const authRoutes = require('./routes/auth');
 const indexRoutes = require('./routes/index');
+const storiesRoutes = require('./routes/stories');
 
 app.use('/auth', authRoutes);
 app.use('/', indexRoutes);
+app.use('/stories', storiesRoutes);
 
 const port = process.env.PORT || 5000;
 
