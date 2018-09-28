@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -26,6 +27,13 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 const app = express();
 
+// handlebars middleware
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main'
+}));
+
+app.set('view engine', 'handlebars');
+
 app.use(cookieParser());
 
 // express session
@@ -47,16 +55,15 @@ app.use((req, res, next) => {
 });
 
 
-// index route
-app.get('/', (req, res) => {
-  res.send('Index');
-});
+
 
 
 // load router
 const authRoutes = require('./routes/auth');
+const indexRoutes = require('./routes/index');
 
 app.use('/auth', authRoutes);
+app.use('/', indexRoutes);
 
 const port = process.env.PORT || 5000;
 
