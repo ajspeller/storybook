@@ -9,6 +9,14 @@ const passport = require('passport');
 const path = require('path');
 const bodyParser = require('body-parser');
 
+// handlebars helpers
+const {
+  truncate,
+  stripTags,
+  formatDate,
+} = require('./helpers/hbs');
+
+
 // load models
 require('./models/User');
 require('./models/Story');
@@ -32,6 +40,11 @@ const app = express();
 
 // handlebars middleware
 app.engine('handlebars', exphbs({
+  helpers: {
+    truncate,
+    stripTags,
+    formatDate,
+  },
   defaultLayout: 'main'
 }));
 

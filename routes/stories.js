@@ -2,10 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const Story = mongoose.model('story')
-const User = mongoose.model('user')
-
-require('../models/Story');
+const Story = mongoose.model('story');
 
 const {
   ensureAuthenticated
@@ -18,9 +15,22 @@ router.get('/', (req, res) => {
     })
     .populate('user')
     .then(stories => {
-      console.log(stories);
       res.render('stories/index', {
         stories
+      });
+    });
+});
+
+// show single story
+router.get('/show/:id', (req, res) => {
+  Story
+    .findOne({
+      _id: req.params.id
+    })
+    .populate('user')
+    .then(story => {
+      res.render('stories/show', {
+        story
       });
     });
 });
