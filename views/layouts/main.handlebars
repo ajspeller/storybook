@@ -35,9 +35,12 @@
       $('.sidenav').sidenav();
       $('select').formSelect();
     });
-    CKEDITOR.replace('body', {
-      plugins: 'wysiwygarea,toolbar,basicstyles,link'
-    });
+
+    if ($(location).attr('href').indexOf('/stories/edit/') > 0) {
+      CKEDITOR.replace('body', {
+        plugins: 'wysiwygarea,toolbar,basicstyles,link'
+      });
+    }
   </script>
 </body>
 
