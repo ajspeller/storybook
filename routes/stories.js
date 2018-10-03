@@ -102,5 +102,19 @@ router.put('/:id', (req, res) => {
     });
 });
 
+// delete story
+router.delete('/:id', (req, res) => {
+  Story
+    .findOne({
+      _id: req.params.id
+    })
+    .then(story => {
+      story.remove()
+        .then(story => {
+          res.redirect('/dashboard');
+        });
+    });
+});
+
 
 module.exports = router;
